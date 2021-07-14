@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Steam Scraping</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{{url_for('static',filename ='/css/styles.css')}}" type="text/css" rel="stylesheet" />
+    </head>
+    <body>
+
+<!--    for top_sellers in top_seller:-->
+<!--    print('Title :',top_sellers.find('span', attrs ={'class':'title'}).string)-->
+<!--    print('Image :', top_sellers.find('div', attrs={'class': 'col search_capsule'}).find('img'))-->
+<!--    print('Rilis :', top_sellers.find('div', attrs={'class':'col search_released responsive_secondrow'}).string)-->
+
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    {%for top_sellers in top_seller%}
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <!-- Product image-->
+                            <a href="{{top_sellers['href']| safe}}">
+                                {{top_sellers.find('div', attrs={'class': 'col search_capsule'}).find('img')|safe}}
+                            </a>
+                            <!-- Product details-->
+                            <div class="text-center">
+                                    <!-- Product name-->
+                                   <a href="{{top_sellers['href']| safe}}">
+                                       <h5>{{top_sellers.find('span', attrs ={'class':'title'}).string}}</h5>
+                                   </a>
+                                    <!-- Product price-->
+                                   {{top_sellers.find('div', attrs={'class':'col search_released responsive_secondrow'}).string}}
+                                </div>
+                            </div>
+                            <!-- Product actions-->
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-center">>View options</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </section>
+        <!-- Footer-->
+        <footer class="py-5 bg-dark">
+            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
